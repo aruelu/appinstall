@@ -7,12 +7,17 @@ if [ "$TEMPLIST" = "" ]
 then
     zenity --error --text=ソフトが選択されていません
 else
-    echo "パッケージ名:" > /tmp/appinstall.log
-    cat ./tmp.list >> /tmp/appinstall.log
-    echo "処理結果:" >> /tmp/appinstall.log
-    xhost +local:
-    pkexec apt install -y `cat ./tmp.list` 2>&1 | tee -a /tmp/appinstall.log | zenity --progress --auto-close --title=キャンセルは押さないで
-    xhost -
-    zenity --text-info --title=結果 --width=600  --height=400 --filename=/tmp/appinstall.log
+    GETPASS=`zenity --password`
+    if [ "$GETPASS" = "" ]
+    then
+        zenity --error --text=パスワードが入力されていません
+    else
+        echo "パッケージ名:" > ./install.log
+        cat ./tmp.list >> ./install.log
+        echo "" >> ./install.log
+        echo "処理結果:" >> ./install.log
+        echo $GETPASS | sudo -S apt install -y `cat ./tmp.list` 2>&1 | tee -a ./install.log | zenity --progress --width=600 --height=200 --title=OKが押せるまで待って下さい（キャンセルは押さないで）
+        zenity --text-info --title=結果 --width=600  --height=400 --filename=./install.log
+    fi
 fi
 rm -f ./tmp.list ./install.log
