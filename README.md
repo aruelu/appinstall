@@ -6,7 +6,7 @@
  
 ２．実行
 
-./appinstall.sh
+./run_appinstall.sh
 
 【設定ファイル】
 
