@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 cd $1
 GETDISPLAY=$2
 
