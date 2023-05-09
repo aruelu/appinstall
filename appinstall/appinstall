@@ -15,11 +15,11 @@ GETSEL=`zenity --list --title="処理選択" \
 echo $GETSEL
 if [ "$GETSEL" = "01" ]
 then
-    pkexec bash  `pwd`/appinstall.sh `pwd` $DISPLAY
+    pkexec bash  `pwd`/apt_install.sh `pwd` $DISPLAY
 
 elif [ "$GETSEL" = "02" ]
 then
-    pkexec bash  `pwd`/appinstall_flatpak.sh `pwd` $DISPLAY $DIRBIN $USER
+    pkexec bash  `pwd`/flatpak_install.sh `pwd` $DISPLAY $DIRBIN $USER
 
 elif [ "$GETSEL" = "03" ]
 then

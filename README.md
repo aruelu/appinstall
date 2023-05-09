@@ -1,28 +1,28 @@
-【使用方法】
+###使用方法
 
-１．準備
+##準備
 
 ./setup.sh
  
-２．実行
+##実行
 
-./run_appinstall.sh
+./appinstall
 
-【設定ファイル１】
+###設定ファイル１
 
-appinstall.conf
+apt.conf
 
-【設定内容】
+##設定内容
 
 ID ソフト名 説明 パッケージ１,パッケージ２・・・
 
 区切は半角スペース、複数パッケージの場合、「,」で区切る
 
-【設定ファイル２】
+###設定ファイル２
 
-appinstall_flatpak.conf
+flatpak.conf
 
-【設定内容】
+##設定内容
 
 ID ソフト名 説明 remotes,アプリケーションID
 

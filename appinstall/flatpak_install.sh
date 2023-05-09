@@ -4,7 +4,7 @@ GETDISPLAY=$2
 
 TMPFILE="/tmp/appinstall_flatpak-"$$".tmp"
 LOGFILE="/tmp/appinstall_flatpak-"$$".log"
-CONFFILE="./appinstall_flatpak.conf"
+CONFFILE="./flatpak.conf"
 DIRBIN=$3
 
 GETUSER=$4
