@@ -35,12 +35,12 @@ else
     zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
     GETPID=`echo $!`
     flatpak install -y $GETREMOTES $GETAPPID &>> $LOGFILE 
-    echo "" >> $LOGFILE
-    echo "############################################################################" >> $LOGFILE
-    echo "flatpak run --command=fc-cache "$GETAPPID" -f -v" >> $LOGFILE
-    flatpak run --command=fc-cache $GETAPPID -f -v >> $LOGFILE
     if [ $? == 0 ]
     then
+        echo "" >> $LOGFILE
+        echo "############################################################################" >> $LOGFILE
+        echo "flatpak run --command=fc-cache "$GETAPPID" -f -v" >> $LOGFILE
+        flatpak run --command=fc-cache $GETAPPID -f -v >> $LOGFILE
         RAPNAME=$DIRBIN"/"`echo $APPNAME | tr '[:upper:]' '[:lower:]'`
         echo "#!/bin/bash" > $RAPNAME
         echo "flatpak run "$GETAPPID >> $RAPNAME
