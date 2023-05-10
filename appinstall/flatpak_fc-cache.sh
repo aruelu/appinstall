@@ -22,7 +22,7 @@ else
     zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
     GETPID=`echo $!`
     GETAPPID=`cat $GETAPP | grep "flatpak" | cut -f 3 -d " "`
-    flatpak run --command=fc-cache $GETAPPID -f -v >> $LOGFILE
+    flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
     kill $GETPID
     zenity --text-info --title=結果 --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
 fi

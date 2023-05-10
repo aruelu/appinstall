@@ -40,7 +40,7 @@ else
         echo "" >> $LOGFILE
         echo "############################################################################" >> $LOGFILE
         echo "flatpak run --command=fc-cache "$GETAPPID" -f -v" >> $LOGFILE
-        flatpak run --command=fc-cache $GETAPPID -f -v >> $LOGFILE
+        flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
         RAPNAME=$DIRBIN"/"`echo $APPNAME | tr '[:upper:]' '[:lower:]'`
         echo "#!/bin/bash" > $RAPNAME
         echo "flatpak run "$GETAPPID >> $RAPNAME
