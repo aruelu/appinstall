@@ -9,6 +9,7 @@ DIRBIN=$2
 echo $GETUSER
 
 zenity --list --width=600 --height=400 --column="ラップスクリプト名" \
+        --title="flatpakの文字化け改善をしたいソフトを選択して下さい" \
         --display=$GETDISPLAY `ls -1 $DIRBIN/* `> $TMPFILE
 
 GETAPP=`cat $TMPFILE`
@@ -24,5 +25,5 @@ else
     GETAPPID=`cat $GETAPP | grep "flatpak" | cut -f 3 -d " "`
     flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
     kill $GETPID
-    zenity --text-info --title=結果 --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    zenity --text-info --title="「flatpakの文字化け改善」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
 fi

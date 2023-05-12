@@ -12,6 +12,7 @@ echo $GETUSER
 
 zenity --list --width=600 --height=400 --column=ID \
         --column=プログラム名 --column=説明 --column=パッケージ名 \
+        --title="flatpakでインストールするソフトを選択して下さい" \
         --display=$GETDISPLAY `cat $CONFFILE` > $TMPFILE
 
 RETID=`cat $TMPFILE`
@@ -49,5 +50,5 @@ else
         zenity --info --title="実行方法" --display=$GETDISPLAY --text=`echo $RAPNAME`"で実行できます" &
     fi
     kill $GETPID
-    zenity --text-info --title=結果 --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    zenity --text-info --title="「flatpakでインストール」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
 fi

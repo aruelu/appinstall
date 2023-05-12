@@ -9,6 +9,7 @@ DIRBIN=$2
 echo $GETUSER
 
 zenity --list --width=600 --height=400 --column="ラップスクリプト名" \
+        --title="flatpakの起動するソフトを選択して下さい" \
         --display=$GETDISPLAY `ls -1 $DIRBIN/* `> $TMPFILE
 
 GETAPP=`cat $TMPFILE`

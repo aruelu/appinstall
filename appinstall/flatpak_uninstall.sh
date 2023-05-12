@@ -7,6 +7,7 @@ LOGFILE="/tmp/flatpak_uninstall-"$$".log"
 DIRBIN=$2
 
 zenity --list --width=600 --height=400 --column="ラップスクリプト名" \
+        --title="flatpakの削除するソフトを選択して下さい" \
         --display=$GETDISPLAY `ls -1 $DIRBIN/* `> $TMPFILE
 
 GETAPP=`cat $TMPFILE`
@@ -22,5 +23,5 @@ else
     flatpak uninstall -y $GETAPPID >> $LOGFILE
     rm -f $GETAPP
     kill $GETPID
-    zenity --text-info --title=結果 --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    zenity --text-info --title="「flatpakのソフト削除」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
 fi

@@ -10,4 +10,4 @@ echo "flatpak update -y" > $LOGFILE
 echo ""$GETAPPID >> $LOGFILE
 flatpak update -y >> $LOGFILE
 kill $GETPID
-zenity --text-info --title=結果 --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+zenity --text-info --title="「flatpakの全てのソフト更新」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE

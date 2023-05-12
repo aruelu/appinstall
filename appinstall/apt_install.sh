@@ -6,7 +6,7 @@ TMPFILE="/tmp/appinstalli-"$$".tmp"
 LOGFILE="/tmp/appinstall-"$$".log"
 CONFFILE="./apt.conf"
 
-zenity --list --width=600 --height=400 --print-column=4 --column=ID --column=プログラム名 --column=説明 --column=パッケージ名 --display=$GETDISPLAY `cat $CONFFILE`  | sed -e "s/,/ /g" > $TMPFILE
+zenity --list --title="aptでインストールするソフトを選択して下さい" --width=600 --height=400 --print-column=4 --column=ID --column=プログラム名 --column=説明 --column=パッケージ名 --display=$GETDISPLAY `cat $CONFFILE`  | sed -e "s/,/ /g" > $TMPFILE
 
 TMPLIST=`cat $TMPFILE`
 if [ "$TMPLIST" = "" ]
@@ -21,5 +21,5 @@ else
     GETPID=`echo $!`
     apt install -y `cat $TMPFILE` &>> $LOGFILE 
     kill $GETPID
-    zenity --text-info --title=結果 --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    zenity --text-info --title="「aptでインストール」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
 fi
