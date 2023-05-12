@@ -11,7 +11,8 @@ GETSEL=`zenity --list --title="処理選択" \
         "03" "flatpakの文字化け改善" \
         "04" "flatpakのソフト起動" \
         "05" "flatpakのソフト更新" \
-        "06" "flatpakのソフト削除" `
+        "06" "flatpakの全てのソフト更新" \
+        "07" "flatpakのソフト削除" `
 echo $GETSEL
 if [ "$GETSEL" = "01" ]
 then
@@ -34,6 +35,10 @@ then
     bash  `pwd`/flatpak_update.sh $DISPLAY $DIRBIN
 
 elif [ "$GETSEL" = "06" ]
+then
+    bash  `pwd`/flatpak_allupdate.sh $DISPLAY
+
+elif [ "$GETSEL" = "07" ]
 then
     bash  `pwd`/flatpak_uninstall.sh $DISPLAY $DIRBIN
 
