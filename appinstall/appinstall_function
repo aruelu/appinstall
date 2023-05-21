@@ -1,0 +1,37 @@
+#!/bin/bash
+
+
+function flatpakinstall() {
+
+    LOGFILE="$1"
+    DIRBIN="$2"
+    APPNAME="$3"
+    GETREMOTES="$4"
+    GETAPPID="$5"
+    GETDISPLAY="$6"
+
+    echo "ソフト名:" > $LOGFILE
+    echo $APPNAME >> $LOGFILE
+    echo "" >> $LOGFILE
+    echo "remotes,Application ID:" >> $LOGFILE
+    echo $GETREMOTES","$GETAPPID >> $LOGFILE
+    echo "" >> $LOGFILE
+    echo "処理結果:" >> $LOGFILE
+
+    flatpak install -y $GETREMOTES $GETAPPID &>> $LOGFILE 
+    if [ $? == 0 ]
+    then
+        echo "" >> $LOGFILE
+        echo "############################################################################" >> $LOGFILE
+        echo "flatpak run --command=fc-cache "$GETAPPID" -f -v" >> $LOGFILE
+
+        flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
+
+        RAPNAME=$DIRBIN"/"`echo $APPNAME | tr '[:upper:]' '[:lower:]'`
+        echo "#!/bin/bash" > $RAPNAME
+        echo "flatpak run "$GETAPPID >> $RAPNAME
+        chown $GETUSER:$GETUSER $RAPNAME
+        chmod +x $RAPNAME
+        zenity --info --title="実行方法" --display=$GETDISPLAY --text=`echo $RAPNAME`"で実行できます" &
+    fi
+ }
