@@ -8,6 +8,7 @@ GETSEL=`zenity --list --title="処理選択" \
         --width=600  --height=400 \
         "01" "aptでインストール" \
         "02" "flatpakでインストール" \
+        "08" "flatpakで探してインストール" \
         "03" "flatpakの文字化け改善" \
         "04" "flatpakのソフト起動" \
         "05" "flatpakのソフト更新" \
@@ -41,6 +42,10 @@ then
 elif [ "$GETSEL" = "07" ]
 then
     bash  `pwd`/flatpak_uninstall.sh $DISPLAY $DIRBIN
+
+elif [ "$GETSEL" = "08" ]
+then
+    pkexec bash  `pwd`/flatpak_search-install.sh `pwd` $DISPLAY $DIRBIN $USER
 
 else
     zenity --error --text="処理が選択されていません"

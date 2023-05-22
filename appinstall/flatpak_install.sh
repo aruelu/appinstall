@@ -8,7 +8,7 @@ CONFFILE="./flatpak.conf"
 DIRBIN=$3
 
 GETUSER=$4
-echo $GETUSER
+echo $GETDISPLAY
 
 . ./appinstall_function
 

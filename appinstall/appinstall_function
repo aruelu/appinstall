@@ -27,11 +27,19 @@ function flatpakinstall() {
 
         flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
 
-        RAPNAME=$DIRBIN"/"`echo $APPNAME | tr '[:upper:]' '[:lower:]'`
-        echo "#!/bin/bash" > $RAPNAME
-        echo "flatpak run "$GETAPPID >> $RAPNAME
-        chown $GETUSER:$GETUSER $RAPNAME
-        chmod +x $RAPNAME
-        zenity --info --title="実行方法" --display=$GETDISPLAY --text=`echo $RAPNAME`"で実行できます" &
+        if [ `echo "$APPID" | grep "Plugin" | wc -l` = 0  ]
+        then
+
+            RAPNAME=$DIRBIN"/"`echo $APPNAME | tr '[:upper:]' '[:lower:]'`
+            echo "#!/bin/bash" > $RAPNAME
+            echo "flatpak run "$GETAPPID >> $RAPNAME
+            chown $GETUSER:$GETUSER $RAPNAME
+            chmod +x $RAPNAME
+            zenity --info --title="実行方法" --display=$GETDISPLAY --text=`echo $RAPNAME`"で実行できます" &
+        else
+            zenity --info --title="確認" --display=$GETDISPLAY --text="プラグインをインストールしました" &
+        fi
+    else
+        zenity --error --display=$GETDISPLAY --text="インストールに失敗しました" &
     fi
  }
