@@ -12,3 +12,5 @@ if [ ! -d $DIRBIN ]
 then
     mkdir $DIRBIN
 fi
+
+zenity --info --text="設定を反映するためには再起動が必要です"
