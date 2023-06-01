@@ -17,13 +17,17 @@ if [ "$GETAPP" = "" ]
 then
     zenity --error --display=$GETDISPLAY --text=選択されていません
 else
-    echo "プログラム名:" > $LOGFILE
-    echo $GETAPP >> $LOGFILE
-    echo "" >> $LOGFILE
+    (
+    echo "プログラム名:" 
+    echo $GETAPP 
+    echo "" 
     zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
     GETPID=`echo $!`
     GETAPPID=`cat $GETAPP | grep "flatpak" | cut -f 3 -d " "`
-    flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
+    flatpak run --command=fc-cache $GETAPPID -f -v 
     kill $GETPID
-    zenity --text-info --title="「flatpakの文字化け改善」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    ) 2>&1 | tee -a $LOGFILE | \
+             zenity --text-info --title="「flatpakの文字化け改善」の処理結果" \
+                    --width=600  --height=400 --display=$GETDISPLAY  \
+                    --auto-scroll --checkbox="処理終了を確認"
 fi
