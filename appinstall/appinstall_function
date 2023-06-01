@@ -10,22 +10,25 @@ function flatpakinstall() {
     GETAPPID="$5"
     GETDISPLAY="$6"
 
-    echo "ソフト名:" > $LOGFILE
-    echo $APPNAME >> $LOGFILE
-    echo "" >> $LOGFILE
-    echo "remotes,Application ID:" >> $LOGFILE
-    echo $GETREMOTES","$GETAPPID >> $LOGFILE
-    echo "" >> $LOGFILE
-    echo "処理結果:" >> $LOGFILE
+    (
+    zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
+    GETPID=`echo $!`
+    echo "ソフト名:" 
+    echo $APPNAME 
+    echo "" 
+    echo "remotes,Application ID:" 
+    echo $GETREMOTES","$GETAPPID 
+    echo "" 
+    echo "処理結果:" 
 
-    flatpak install -y $GETREMOTES $GETAPPID &>> $LOGFILE 
+    flatpak install -y $GETREMOTES $GETAPPID 
     if [ $? == 0 ]
     then
-        echo "" >> $LOGFILE
-        echo "############################################################################" >> $LOGFILE
-        echo "flatpak run --command=fc-cache "$GETAPPID" -f -v" >> $LOGFILE
+        echo "" 
+        echo "############################################################################"
+        echo "flatpak run --command=fc-cache "$GETAPPID" -f -v"
 
-        flatpak run --command=fc-cache $GETAPPID -f -v &>> $LOGFILE
+        flatpak run --command=fc-cache $GETAPPID -f -v 
 
         if [ `echo "$APPID" | grep "Plugin" | wc -l` = 0  ]
         then
@@ -42,4 +45,10 @@ function flatpakinstall() {
     else
         zenity --error --display=$GETDISPLAY --text="インストールに失敗しました" &
     fi
+    kill $GETPID
+    ) 2>&1 | tee -a $LOGFILE | \
+        zenity --text-info --title="「flatpakでインストール」の処理結果" \
+        --width=600  --height=400 --display=$GETDISPLAY  \
+        --auto-scroll --checkbox="処理終了を確認"
+
  }

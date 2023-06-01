@@ -74,13 +74,13 @@ else
     echo $GETDISPLAY
 
 
-    zenity --info --title="処理中" --display="$GETDISPLAY" \
-           --text="このウィンドウが自動で閉じるまで待って下さい" &
-    GETPID=`echo $!`
+    #zenity --info --title="処理中" --display="$GETDISPLAY" \
+    #       --text="このウィンドウが自動で閉じるまで待って下さい" &
+    #GETPID=`echo $!`
     flatpakinstall "$LOGFILE" "$DIRBIN" "$APPNAME" "$GETREMOTES" "$GETAPPID" "$GETDISPLAY"
-    kill $GETPID
-    zenity --text-info --title="「flatpakで探してインストール」の処理結果" \
-            --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    #kill $GETPID
+    #zenity --text-info --title="「flatpakで探してインストール」の処理結果" \
+    #        --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
 
 
 fi
