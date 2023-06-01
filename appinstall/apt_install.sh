@@ -13,13 +13,17 @@ if [ "$TMPLIST" = "" ]
 then
     zenity --error --display=$GETDISPLAY --text=ソフトが選択されていません
 else
-    echo "パッケージ名:" > $LOGFILE
-    cat $TMPFILE >> $LOGFILE
-    echo "" >> $LOGFILE
-    echo "処理結果:" >> $LOGFILE
-    zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
-    GETPID=`echo $!`
-    apt install -y `cat $TMPFILE` &>> $LOGFILE 
-    kill $GETPID
-    zenity --text-info --title="「aptでインストール」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    (
+    echo "パッケージ名:" 
+    cat $TMPFILE 
+    echo "" 
+    echo "処理結果:" 
+    #zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
+    #GETPID=`echo $!`
+    apt install -y `cat $TMPFILE` 
+    #kill $GETPID
+    ) | \
+    zenity --text-info --title="「aptでインストール」の処理結果" \
+           --width=600  --height=400 --display=$GETDISPLAY  \
+           --auto-scroll --checkbox="処理終了を確認"
 fi
