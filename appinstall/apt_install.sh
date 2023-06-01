@@ -18,11 +18,11 @@ else
     cat $TMPFILE 
     echo "" 
     echo "処理結果:" 
-    #zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
-    #GETPID=`echo $!`
+    zenity --info --title="処理中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
+    GETPID=`echo $!`
     apt install -y `cat $TMPFILE` 
-    #kill $GETPID
-    ) | tee -a $LOGFILE | \
+    kill $GETPID
+    ) 2>&1 | tee -a $LOGFILE | \
     zenity --text-info --title="「aptでインストール」の処理結果" \
            --width=600  --height=400 --display=$GETDISPLAY  \
            --auto-scroll --checkbox="処理終了を確認"
