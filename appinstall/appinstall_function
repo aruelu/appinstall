@@ -30,10 +30,10 @@ function flatpakinstall() {
 
         flatpak run --command=fc-cache $GETAPPID -f -v 
 
-        if [ `echo "$APPID" | grep "Plugin" | wc -l` = 0  ]
+        if [ `echo "$GETAPPID" | grep "Plugin" | wc -l` = 0  ]
         then
-
-            RAPNAME=$DIRBIN"/"`echo $APPNAME | tr '[:upper:]' '[:lower:]'`
+            TMPNAME=`echo "$GETAPPID" | cut -f 3 -d "." | tr '[:upper:]' '[:lower:]'`
+            RAPNAME=$DIRBIN"/"$TMPNAME
             echo "#!/bin/bash" > $RAPNAME
             echo "flatpak run "$GETAPPID >> $RAPNAME
             chown $GETUSER:$GETUSER $RAPNAME
