@@ -2,7 +2,7 @@
 cd $1
 GETDISPLAY=$2
 
-TMPFILE="/tmp/appinstalli-"$$".tmp"
+TMPFILE="/tmp/appinstall-"$$".tmp"
 LOGFILE="/tmp/appinstall-"$$".log"
 CONFFILE="./apt.conf"
 
@@ -22,7 +22,7 @@ else
     #GETPID=`echo $!`
     apt install -y `cat $TMPFILE` 
     #kill $GETPID
-    ) | \
+    ) | tee -a $LOGFILE | \
     zenity --text-info --title="「aptでインストール」の処理結果" \
            --width=600  --height=400 --display=$GETDISPLAY  \
            --auto-scroll --checkbox="処理終了を確認"
