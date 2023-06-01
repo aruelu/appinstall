@@ -15,12 +15,16 @@ if [ "$GETAPP" = "" ]
 then
     zenity --error --display=$GETDISPLAY --text=選択されていません
 else
+    (
     zenity --info --title="更新中" --display=$GETDISPLAY --text="このウィンドウが自動で閉じるまで待って下さい" &
     GETPID=`echo $!`
     GETAPPID=`cat $GETAPP | grep "flatpak" | cut -f 3 -d " "`
-    echo "flatpak update "$GETAPPID > $LOGFILE
-    echo ""$GETAPPID >> $LOGFILE
-    flatpak update -y $GETAPPID >> $LOGFILE
+    echo "flatpak update "$GETAPPID 
+    echo ""$GETAPPID 
+    flatpak update -y $GETAPPID 
     kill $GETPID
-    zenity --text-info --title="「flatpakのソフト更新」の処理結果" --width=600  --height=400 --display=$GETDISPLAY --filename=$LOGFILE
+    ) 2>&1 | tee -a $LOGFILE | \
+            zenity --text-info --title="「flatpakのソフト更新」の処理結果" \
+                   --width=600  --height=400 --display=$GETDISPLAY  \
+                   --auto-scroll --checkbox="処理終了を確認"
 fi
