@@ -6,7 +6,7 @@
 - flatpakの文字化け改善※
 - flatpakのソフト起動※
 - flatpakのソフト更新※
-- flatpakの全てのソフト更新※
+- flatpakの全てのソフト更新
 - flatpakのソフト削除※
 
 ※が付いた機能はappinstallでインストールしたソフトが対象になります。
