@@ -1,3 +1,16 @@
+# appinstallの機能
+下記の機能があります。
+- aptでインストール
+- flatpakでインストール
+- flatpakで探してインストール
+- flatpakの文字化け改善※
+- flatpakのソフト起動※
+- flatpakのソフト更新※
+- flatpakの全てのソフト更新※
+- flatpakのソフト削除※
+
+※が付いた機能はappinstallでインストールしたソフトが対象になります。
+
 # 使用方法
 
 ## 準備
