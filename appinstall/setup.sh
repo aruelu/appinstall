@@ -11,16 +11,16 @@ elif type yum &> /dev/null
 then
     package_command="yum install -y"
 
-elif type pacman &> /dev/null
-then
-    sudo pacman -Syy
-    package_command="pacman -S"
-
-elif type zypper &> /dev/null
-then
-    sudo zypper refresh
-    package_command="zypper --non-interactive in"
-
+#elif type pacman &> /dev/null
+#then
+#    sudo pacman -Syy
+#    package_command="pacman -S"
+#
+#elif type zypper &> /dev/null
+#then
+#    sudo zypper refresh
+#    package_command="zypper --non-interactive in"
+#
 else
     echo "サポートされているパッケージマネージャが無いため終了します！"
     exit 1
